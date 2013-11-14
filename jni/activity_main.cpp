@@ -10,6 +10,10 @@
 #include <engine.h>
 #include <renderer.h>
 
+#include <btBulletDynamicsCommon.h>
+
+#define DEBUG
+
 #ifdef DEBUG
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
@@ -24,6 +28,9 @@
 struct Controller{
     Renderer* renderer;
     Engine* engine;
+
+    bool animate_engine;
+    bool animate_renderer;
 
     // Android hardware stuff
     ASensorManager* sensorManager;
@@ -94,7 +101,7 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
             {
                 ASensorEventQueue_disableSensor(controller->sensorEventQueue, controller->accelerometerSensor);
             }
-            // TODO: Stop animating
+            // Stop animating?
             break;
         case APP_CMD_SAVE_STATE:
             LOGE("SAVE_STATE called");
@@ -107,6 +114,8 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
             break;
         case APP_CMD_PAUSE:
             LOGE("PAUSE called");
+            controller->animate_engine = false;
+            controller->animate_renderer = false;
             break;
         case APP_CMD_STOP:
             LOGE("STOP called");
@@ -136,11 +145,13 @@ void android_main(struct android_app* app) {
     Controller controller;
     controller.engine = &engine;
     controller.renderer = &renderer;
+    controller.animate_engine = true;
+    controller.animate_renderer = false;
 
     app->userData = &controller;
     app->onAppCmd = &handle_cmd;
     app->onInputEvent = &handle_input;
-    renderer.link(&(engine.objects), &(app->window));
+    renderer.link(&(engine.rigidBodies), &(app->window));
     LOGE("Renderer Linked");
 
     controller.sensorManager = ASensorManager_getInstance();
@@ -151,6 +162,7 @@ void android_main(struct android_app* app) {
 
     timespec prevT;
     clock_gettime(CLOCK_MONOTONIC, &prevT);
+
     while (1) {
         int ident;
         int fdesc;
@@ -187,8 +199,10 @@ void android_main(struct android_app* app) {
         	LOGE("RUNNING");
         }
         prevT = currentT;
-//        engine.update(timeDelta);
-        renderer.drawFrame();
+        if(controller.animate_engine) engine.simulate(timeDelta);
+        if(controller.animate_renderer) renderer.drawFrame();
     }
 }
+
+#undef DEBUG
 //END_INCLUDE(all)

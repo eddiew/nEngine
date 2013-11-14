@@ -30,11 +30,11 @@ struct Renderer
     EGLContext context;
     int32_t width;
     int32_t height;
-    std::vector<btRigidBody>* objects;
+    std::vector<btRigidBody*>* rigidBodies;
     bool isReady;
 
     int eglInit();
-    void link(std::vector<btRigidBody>* linkedObjects, ANativeWindow** window);
+    void link(std::vector<btRigidBody*>* linkedRigidBodies, ANativeWindow** window);
     void drawFrame();
     void terminate();
 };
@@ -42,9 +42,9 @@ struct Renderer
 /**
  * Link this instance to an app and an engine
  */
-void Renderer::link(std::vector<btRigidBody>* linkedObjects, ANativeWindow** window)
+void Renderer::link(std::vector<btRigidBody*>* linkedRigidBodies, ANativeWindow** window)
 {
-    objects = linkedObjects;
+    rigidBodies = linkedRigidBodies;
     this->window = window;
 }
 
@@ -147,7 +147,7 @@ void Renderer::drawFrame()
     // Temp test function: just fill the screen with a color
     timespec t;
     clock_gettime(CLOCK_MONOTONIC, &t);
-    glClearColor((float)(t.tv_sec%3)/3.0, (float)((t.tv_sec+1)%3)/3.0, (float)((t.tv_sec+2)%3)/3.0, 1);
+//    glClearColor((float)(t.tv_sec%3)/3.0, (float)((t.tv_sec+1)%3)/3.0, (float)((t.tv_sec+2)%3)/3.0, 1);
 //    glClearColor(1,0,0,1);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -155,7 +155,7 @@ void Renderer::drawFrame()
     eglSwapBuffers(display,surface);
 
 
-//    for(btRigidBody o : *objects)
+//    for(btRigidBody* o : *rigidBodies)
 //    {
 //        // TODO: draw the object
 //    }
