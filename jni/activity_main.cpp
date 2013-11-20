@@ -81,8 +81,8 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
         case APP_CMD_INIT_WINDOW:
             // get the window ready for showing
             LOGE("INIT_WINDOW Called");
-            if(renderer->init()) LOGE("Error initializing EGL Display");
-            else LOGE("EGL Display initialized");
+            if(renderer->init()) LOGE("EGL Display initialized");
+            else LOGE("Error initializing EGL Display");
             controller->animate_renderer = true;
             break;
         case APP_CMD_GAINED_FOCUS:
@@ -181,7 +181,7 @@ void android_main(struct android_app* app) {
                     {
                        worldAccel = event.acceleration;
                     }
-//                    engine.update_gravity(worldAccel.x, worldAccel.y, worldAccel.z);
+                    engine.update_gravity(worldAccel.x, worldAccel.y, worldAccel.z);
                 }
             }
             while(!controller.isRunning){
@@ -196,9 +196,11 @@ void android_main(struct android_app* app) {
         timespec currentT;
         clock_gettime(CLOCK_MONOTONIC, &currentT);
         float timeDelta = currentT.tv_sec-prevT.tv_sec + (float)(currentT.tv_nsec-prevT.tv_nsec)/1e9f;
-        if(currentT.tv_sec != prevT.tv_sec){
-            LOGE("RUNNING");
-        }
+        #ifdef DEBUG
+            if(currentT.tv_sec != prevT.tv_sec){
+                LOGE("RUNNING");
+            }
+        #endif // DEBUG
         prevT = currentT;
         if(controller.animate_engine) engine.simulate(timeDelta);
         if(controller.animate_renderer) renderer.drawFrame();

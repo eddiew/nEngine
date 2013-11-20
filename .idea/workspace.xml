@@ -70,7 +70,7 @@
       <file leaf-file-name="activity_main.cpp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jni/activity_main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="48" selection-start="2302" selection-end="2302" vertical-scroll-proportion="0.0" vertical-offset="890" max-vertical-offset="3638">
+            <state line="184" column="17" selection-start="6161" selection-end="6161" vertical-scroll-proportion="0.0" vertical-offset="2760" max-vertical-offset="3672">
               <folding />
             </state>
           </provider>
@@ -79,25 +79,25 @@
       <file leaf-file-name="engine.h" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jni/engine.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="49" selection-start="2991" selection-end="2991" vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="2074">
+            <state line="34" column="21" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2074">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="renderer.h" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="renderer.h" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jni/renderer.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="217" column="5" selection-start="7086" selection-end="7086" vertical-scroll-proportion="0.0" vertical-offset="1887" max-vertical-offset="5049">
+            <state line="223" column="7" selection-start="7080" selection-end="7080" vertical-scroll-proportion="0.41975307" vertical-offset="3451" max-vertical-offset="4590">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="51" selection-start="776" selection-end="776" vertical-scroll-proportion="0.454435" vertical-offset="0" max-vertical-offset="823">
+            <state line="22" column="51" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="663">
               <folding />
             </state>
           </provider>
@@ -131,10 +131,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/jni/engine.h" />
-        <option value="$PROJECT_DIR$/jni/activity_main.cpp" />
-        <option value="$PROJECT_DIR$/jni/renderer.h" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/jni/renderer.h" />
+        <option value="$PROJECT_DIR$/jni/activity_main.cpp" />
+        <option value="$PROJECT_DIR$/jni/engine.h" />
       </list>
     </option>
   </component>
@@ -169,7 +169,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -271,6 +270,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,6 +288,9 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/AndroidStudioProjects/t3dProject" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -323,6 +326,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -348,19 +364,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -835,34 +838,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jni/engine.h">
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="49" selection-start="2991" selection-end="2991" vertical-scroll-proportion="0.0" vertical-offset="890" max-vertical-offset="2074">
+        <state line="22" column="51" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jni/activity_main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="48" selection-start="2302" selection-end="2302" vertical-scroll-proportion="0.0" vertical-offset="890" max-vertical-offset="3638">
+        <state line="184" column="17" selection-start="6161" selection-end="6161" vertical-scroll-proportion="0.0" vertical-offset="2760" max-vertical-offset="3672">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jni/engine.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="21" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2074">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jni/renderer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="5" selection-start="7086" selection-end="7086" vertical-scroll-proportion="0.0" vertical-offset="1887" max-vertical-offset="5049">
+        <state line="223" column="7" selection-start="7080" selection-end="7080" vertical-scroll-proportion="0.41975307" vertical-offset="3451" max-vertical-offset="4590">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="51" selection-start="776" selection-end="776" vertical-scroll-proportion="0.454435" vertical-offset="0" max-vertical-offset="823">
-          <folding />
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>nEngine</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>android-support-v4</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

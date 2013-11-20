@@ -34,8 +34,7 @@ struct Renderer
     EGLDisplay display;
     EGLSurface surface;
     EGLContext context;
-    int32_t width;
-    int32_t height;
+    EGLint windowWidth, windowHeight;
     //openGL stuff
     GLuint glProgramHandle;
 
@@ -43,8 +42,6 @@ struct Renderer
     void link(btDiscreteDynamicsWorld* dynamicsWorld, ANativeWindow** window);
     void drawFrame();
     void terminate();
-    GLuint compileShader(GLenum shaderType, const char* shaderSrc);
-    GLuint createProgram(const char* vertexShaderSrc, const char* fragmentShaderSrc);
 };
 //Putting these here b/c they don't need to be dynamically assigned to each instance of renderer.
 //Unless I decide to make the user-definable, that is. In that case I'd have to read them in from a file
@@ -85,90 +82,10 @@ void Renderer::link(btDiscreteDynamicsWorld* dynamicsWorld, ANativeWindow** wind
 }
 
 /**
- * Initialize an EGL context for the current display
- * Return: 0 if no errors, otherwise the ID of the error encountered
- */
-int Renderer::init()
-{
-    LOGE("renderer init called");
-    EGLint w, h, dummy, format;
-    EGLint numConfigs;
-    EGLConfig config;
-    EGLSurface surface;
-    EGLContext context;
-    EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    eglInitialize(display,0,0);
-    /* Here, the application chooses the configuration it desires. In this
-     * sample, we have a very simplified selection process, where we pick
-     * the first EGLConfig that matches our criteria
-     * TODO: find this function's declaration and fix if necessary
-     */
-    eglChooseConfig(display, attribs, &config, 1, &numConfigs);
-    /* EGL_NATIVE_VISUAL_ID is an attribute of the EGLConfig that is
-     * guaranteed to be accepted by ANativeWindow_setBuffersGeometry().
-     * As soon as we picked a EGLConfig, we can safely reconfigure the
-     * ANativeWindow buffers to match, using EGL_NATIVE_VISUAL_ID. */
-    eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
-    ANativeWindow_setBuffersGeometry(*window, 0, 0, format);
-
-    surface = eglCreateWindowSurface(display, config,  *window, NULL);
-    context = eglCreateContext(display, config, NULL, attribList);
-
-    if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE)
-    {
-        LOGE("Unable to eglMakeCurrent");
-        return 1;
-    }
-
-    eglQuerySurface(display, surface, EGL_WIDTH, &w);
-    eglQuerySurface(display, surface, EGL_HEIGHT, &h);
-//    LOGE("display dimensions: %d, %d", w, h);
-
-    this->display = display;
-    this->context = context;
-    this->surface = surface;
-    width = w;
-    height = h;
-    LOGE("GL init started");
-    // Initialize GL state.
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_DEPTH_TEST);// Originally glDisable
-    glProgramHandle = createProgram(vertexShaderSrc, fragmentShaderSrc);
-//    LOGE("Program handle: %d",glProgramHandle);
-    glLinkProgram(glProgramHandle);
-    LOGE("FLAG1");
-    #ifdef DEBUG
-        GLint programLinked;
-        glGetProgramiv(glProgramHandle, GL_LINK_STATUS, &programLinked);
-        LOGE("FLAG2");
-        if(!programLinked)
-        {
-            GLint infoMsgLength = 0;
-            glGetProgramiv(glProgramHandle, GL_INFO_LOG_LENGTH, &infoMsgLength);
-            LOGE("FLAG3");
-            if(infoMsgLength > 1)
-            {
-                LOGE("Flag4");
-                char* infoLogEntry = new char[infoMsgLength];//malloc(sizeof(char)*infoMsgLength);
-                glGetProgramInfoLog(glProgramHandle, infoMsgLength, NULL, infoLogEntry);
-                LOGE("Error linking program:\n%s\n", infoLogEntry);
-                delete[] infoLogEntry;//free(infoLogEntry);
-            }
-            glDeleteProgram(glProgramHandle);
-            return 2;
-        }
-    #endif // DEBUG
-    LOGE("FLAG10");
-    glUseProgram(glProgramHandle);// Should I call this more often??
-    LOGE("GL init finished");
-    return 0;
-}
-
-/**
  * Compile an openGL shader
  * Return: the compiled shader
  */
-GLuint Renderer::compileShader(GLenum shaderType, const char* shaderSrc)
+static GLuint compileShader(GLenum shaderType, const char* shaderSrc)
 {
     GLuint shaderHandle = glCreateShader(shaderType);
     #ifdef DEBUG
@@ -203,9 +120,9 @@ GLuint Renderer::compileShader(GLenum shaderType, const char* shaderSrc)
 
 /**
  * Create an openGL program and attach shaders
- * Return: the created program
+ * Return: the created program's handle
  */
-GLuint Renderer::createProgram(const char* vertexShaderSrc, const char* fragmentShaderSrc)
+static GLuint initGLProgram(const char* vertexShaderSrc, const char* fragmentShaderSrc)
 {
     GLuint vertexShaderHandle = compileShader(GL_VERTEX_SHADER, vertexShaderSrc);
     GLuint fragmentShaderHandle = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSrc);
@@ -219,7 +136,59 @@ GLuint Renderer::createProgram(const char* vertexShaderSrc, const char* fragment
     #endif // DEBUG
     glAttachShader(programHandle, vertexShaderHandle);
     glAttachShader(programHandle, fragmentShaderHandle);
-//    glBindAttribLocation(programHandle, 0, "vPosition");// Not sure why this is necessary
+    glBindAttribLocation(programHandle, 0, "vPosition");// Not sure why this is necessary
+    glLinkProgram(programHandle);
+    #ifdef DEBUG
+        GLint programLinked;
+        glGetProgramiv(programHandle, GL_LINK_STATUS, &programLinked);
+        if(!programLinked)
+        {
+            GLint infoMsgLength = 0;
+            glGetProgramiv(programHandle, GL_INFO_LOG_LENGTH, &infoMsgLength);
+            if(infoMsgLength > 1)
+            {
+                char* infoLogEntry = new char[infoMsgLength];//malloc(sizeof(char)*infoMsgLength);
+                glGetProgramInfoLog(programHandle, infoMsgLength, NULL, infoLogEntry);
+                LOGE("Error linking program:\n%s\n", infoLogEntry);
+                delete[] infoLogEntry;//free(infoLogEntry);
+            }
+            glDeleteProgram(programHandle);
+            return 0;
+        }
+    #endif // DEBUG
+    glUseProgram(programHandle);// Should I call this more often??
+    return programHandle;
+}
+
+/**
+ * Initialize an EGL context for the current display
+ * Return: 1 if no errors, otherwise the ID of the error encountered
+ */
+int Renderer::init()
+{
+    LOGE("renderer init called");
+    EGLint format;
+    EGLint numConfigs;
+    EGLConfig config;
+    display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+    eglInitialize(display,0,0);
+    eglChooseConfig(display, attribs, &config, 1, &numConfigs);
+    eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
+    ANativeWindow_setBuffersGeometry(*window, 0, 0, format);
+
+    surface = eglCreateWindowSurface(display, config,  *window, NULL);
+    context = eglCreateContext(display, config, NULL, attribList);
+
+    eglMakeCurrent(display, surface, surface, context);
+
+    eglQuerySurface(display, surface, EGL_WIDTH, &windowWidth);
+    eglQuerySurface(display, surface, EGL_HEIGHT, &windowHeight);
+//    LOGE("display dimensions: %d, %d", windowWidth, windowHeight);
+    // Initialize GL state.
+    glProgramHandle = initGLProgram(vertexShaderSrc, fragmentShaderSrc);
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+    return 1;
 }
 
 /**
@@ -237,51 +206,55 @@ void Renderer::terminate()
     display = EGL_NO_DISPLAY;
     context = EGL_NO_CONTEXT;
     surface = EGL_NO_SURFACE;
+    LOGE("Renderer terminated");
 }
 
 void Renderer::drawFrame()
 {
     if(display == NULL)
     {
-//        LOGE("Display not ready");
+        LOGE("Display not ready");
         return;
     }
 
-    // Temp test function: just fill the screen with a color
-    timespec t;
-    clock_gettime(CLOCK_MONOTONIC, &t);
-//    glClearColor((float)(t.tv_sec%3)/3.0, (float)((t.tv_sec+1)%3)/3.0, (float)((t.tv_sec+2)%3)/3.0, 1);
-//    glClearColor(1,0,0,1);
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    int ncobs = dynamicsWorld->getNumCollisionObjects();//why doesn't this work?
+//    LOGE("Num collision objects: %d", dynamicsWorld->getNumCollisionObjects());
+//    for(int i = 0; i < dynamicsWorld->getNumCollisionObjects(); i++)
+//    {
+//        LOGE("Flag2");
+//        btCollisionObject* collisionObject = dynamicsWorld->getCollisionObjectArray()[i];
+//        btScalar worldTransform[16];
+//        collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
+//        switch(collisionObject->getCollisionShape()->getShapeType())
+//        {
+//            case CUSTOM_CONVEX_SHAPE_TYPE:
+//                break;
+//            case BOX_SHAPE_PROXYTYPE:
+//                break;
+//            case UNIFORM_SCALING_SHAPE_PROXYTYPE:
+//                break;
+//            case COMPOUND_SHAPE_PROXYTYPE:
+//                break;
+//
+//        }
+//        LOGE("Flag3");
+//        GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
+//         -0.5f, -0.5f, 0.0f,
+//         0.5f, -0.5f, 0.0f};
+//         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+//          glEnableVertexAttribArray(0);
+//          glDrawArrays(GL_TRIANGLES, 0, 3);
+//    }
+//    LOGE("Flag10");
+    GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f};
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+    glEnableVertexAttribArray(0);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 
-
-    for(int i = 0; i < dynamicsWorld->getNumCollisionObjects(); i++)
-    {
-        btCollisionObject* collisionObject = dynamicsWorld->getCollisionObjectArray()[i];
-        btScalar worldTransform[16];
-        collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
-        switch(collisionObject->getCollisionShape()->getShapeType())
-        {
-            case CUSTOM_CONVEX_SHAPE_TYPE:
-                break;
-            case BOX_SHAPE_PROXYTYPE:
-                break;
-            case UNIFORM_SCALING_SHAPE_PROXYTYPE:
-                break;
-            case COMPOUND_SHAPE_PROXYTYPE:
-                break;
-
-        }
-        GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
-         -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f};
-         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-          glEnableVertexAttribArray(0);
-          glDrawArrays(GL_TRIANGLES, 0, 3);
-    }
     eglSwapBuffers(display,surface);
-
 //    LOGE("FRAME DRAWN");
 }
 

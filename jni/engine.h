@@ -83,7 +83,7 @@ void Engine::simulate(float timeDelta)
 void Engine::update_gravity(float x, float y, float z)
 {
     dynamicsWorld->setGravity(btVector3(x,-y,z));
-    LOGE("Gravity updated");
+//    LOGE("Gravity updated");
 }
 
 /**
