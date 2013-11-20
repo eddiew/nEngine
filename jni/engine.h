@@ -21,18 +21,17 @@
 
 struct Engine
 {
-    // Bullet physics stuff
+    // Bullet physics stuff TODO: change these to unique_ptr?
     btBroadphaseInterface* broadphase;
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
     btSequentialImpulseConstraintSolver* solver;
     btDiscreteDynamicsWorld* dynamicsWorld;
-    std::vector<btRigidBody*> rigidBodies;
     std::vector<btCollisionShape*> collisionShapes;
 
     void init();
     void simulate(float timeDelta);
-    void update_world_accel(float x, float y, float z);
+    void update_gravity(float x, float y, float z);
     void terminate();
 };
 
@@ -56,9 +55,7 @@ void Engine::init()
     btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0,groundMotionState,groundShape,btVector3(0,0,0));
     btRigidBody* groundRigidBody = new btRigidBody(groundRigidBodyCI);
     dynamicsWorld->addRigidBody(groundRigidBody);
-    rigidBodies.push_back(groundRigidBody);
     collisionShapes.push_back(groundShape);
-//    delete groundShape;
 
     //Add a sphere
     btCollisionShape* sphereShape = new btSphereShape(1);
@@ -69,9 +66,7 @@ void Engine::init()
     btRigidBody::btRigidBodyConstructionInfo sphereRigidBodyCI(mass,sphereMotionState,sphereShape,sphereInertia);
     btRigidBody* sphereRigidBody = new btRigidBody(sphereRigidBodyCI);
     dynamicsWorld->addRigidBody(sphereRigidBody);
-    rigidBodies.push_back(sphereRigidBody);
     collisionShapes.push_back(sphereShape);
-//    delete sphereShape;
 
     LOGE("Test init finished");
 }
@@ -81,14 +76,14 @@ void Engine::init()
  */
 void Engine::simulate(float timeDelta)
 {
-    LOGE("Simulate Called");
     dynamicsWorld->stepSimulation(timeDelta, 10);
-    LOGE("Frame Simulated");
+//    LOGE("Frame Simulated");
 }
 
-void Engine::update_world_accel(float x, float y, float z)
+void Engine::update_gravity(float x, float y, float z)
 {
     dynamicsWorld->setGravity(btVector3(x,-y,z));
+    LOGE("Gravity updated");
 }
 
 /**
@@ -96,11 +91,13 @@ void Engine::update_world_accel(float x, float y, float z)
  */
 void Engine::terminate()
 {
-    for(btRigidBody* rigidBody : rigidBodies)
+    for(int i = 0; i < dynamicsWorld->getNumCollisionObjects(); i++)
     {
-        dynamicsWorld->removeRigidBody(rigidBody);
-        delete rigidBody->getMotionState();
-        delete rigidBody;
+        btCollisionObject* o = dynamicsWorld->getCollisionObjectArray()[i];
+        dynamicsWorld->removeCollisionObject(o);
+        btRigidBody* body = btRigidBody::upcast(o);
+        if(body && body->getMotionState()) delete body->getMotionState();
+        delete o;
     }
     for(btCollisionShape* collisionShape : collisionShapes)
     {
@@ -116,4 +113,4 @@ void Engine::terminate()
 
 #undef DEBUG
 
-#endif
+#endif // _ENGINE

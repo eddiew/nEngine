@@ -199,7 +199,8 @@
  /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h \
  /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h \
  /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h \
- /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h
+ /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/memory
 
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/time.h:
 
@@ -600,3 +601,5 @@
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h:
 
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/memory:

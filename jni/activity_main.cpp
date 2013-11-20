@@ -9,6 +9,7 @@
 
 #include <engine.h>
 #include <renderer.h>
+#include <memory>
 
 #include <btBulletDynamicsCommon.h>
 
@@ -29,6 +30,7 @@ struct Controller{
     Renderer* renderer;
     Engine* engine;
 
+    bool isRunning;
     bool animate_engine;
     bool animate_renderer;
 
@@ -36,7 +38,6 @@ struct Controller{
     ASensorManager* sensorManager;
     const ASensor* accelerometerSensor;
     ASensorEventQueue* sensorEventQueue;
-
 };
 
 static int32_t handle_input(struct android_app* app, AInputEvent* event)
@@ -44,18 +45,18 @@ static int32_t handle_input(struct android_app* app, AInputEvent* event)
     LOGE("Handle Input Called");
     switch (AInputEvent_getType(event))
     {
-    // Screen touches
-    case AINPUT_EVENT_TYPE_MOTION:
-    {
-        // The number of motion events in the queue?
-        size_t pointerCount = AMotionEvent_getPointerCount(event);
-        return 1;
-    }
-    // Key presses
-    case AINPUT_EVENT_TYPE_KEY:
-    {
-        return 1;
-    }
+        // Screen touches
+        case AINPUT_EVENT_TYPE_MOTION:
+        {
+            // The number of motion events in the queue?
+            size_t pointerCount = AMotionEvent_getPointerCount(event);
+            return 1;
+        }
+        // Key presses
+        case AINPUT_EVENT_TYPE_KEY:
+        {
+            return 1;
+        }
     }
     return 1;
 }
@@ -70,19 +71,19 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
     {
         case APP_CMD_START:
             LOGE("START called");
+            engine->init();
+            controller->isRunning = true;
             break;
         case APP_CMD_RESUME:
             LOGE("RESUME called");
+            controller->animate_engine = true;
             break;
         case APP_CMD_INIT_WINDOW:
             // get the window ready for showing
             LOGE("INIT_WINDOW Called");
-            if(!(renderer->isReady))
-            {
-                if(renderer->eglInit()) LOGE("Error initializing EGL Display");
-                else LOGE("EGL Display initialized");
-                renderer->drawFrame();
-            }
+            if(renderer->init()) LOGE("Error initializing EGL Display");
+            else LOGE("EGL Display initialized");
+            controller->animate_renderer = true;
             break;
         case APP_CMD_GAINED_FOCUS:
             LOGE("GAINED_FOCUS called");
@@ -111,15 +112,16 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
             LOGE("TERM_WINDOW called");
             // clean up the window because it is being hidden/closed
             renderer->terminate();
+            controller->animate_renderer = false;
             break;
         case APP_CMD_PAUSE:
             LOGE("PAUSE called");
             controller->animate_engine = false;
-            controller->animate_renderer = false;
             break;
         case APP_CMD_STOP:
             LOGE("STOP called");
             engine->terminate();
+            controller->isRunning = false;
             break;
         case APP_CMD_DESTROY:
             LOGE("DESTROY called");
@@ -138,31 +140,26 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
 void android_main(struct android_app* app) {
     // Make sure glue isn't stripped.
     app_dummy();
-    Renderer renderer;
-    renderer.isReady = false;
-    Engine engine;
-    engine.init();
     Controller controller;
-    controller.engine = &engine;
-    controller.renderer = &renderer;
-    controller.animate_engine = true;
+    controller.animate_engine = false;
     controller.animate_renderer = false;
+    Engine engine;
+    controller.engine = &engine;
+    Renderer renderer;
+    controller.renderer = &renderer;
+    renderer.link(engine.dynamicsWorld, &(app->window));
+    LOGE("Renderer Linked");
 
     app->userData = &controller;
     app->onAppCmd = &handle_cmd;
     app->onInputEvent = &handle_input;
-    renderer.link(&(engine.rigidBodies), &(app->window));
-    LOGE("Renderer Linked");
 
     controller.sensorManager = ASensorManager_getInstance();
     controller.accelerometerSensor = ASensorManager_getDefaultSensor(controller.sensorManager, ASENSOR_TYPE_ACCELEROMETER);
     controller.sensorEventQueue = ASensorManager_createEventQueue(controller.sensorManager, app->looper, LOOPER_ID_USER, NULL, NULL);
-
-    ASensorVector worldAccel;
-
     timespec prevT;
     clock_gettime(CLOCK_MONOTONIC, &prevT);
-
+    //main loop code
     while (1) {
         int ident;
         int fdesc;
@@ -175,28 +172,32 @@ void android_main(struct android_app* app) {
             if(source) source->process(app, source);
             // If a sensor has data, process it now.
             if (ident == LOOPER_ID_USER)
-                           {
-                               if (controller.accelerometerSensor != NULL)
-                               {
-                                   ASensorEvent event;
-                                   while (ASensorEventQueue_getEvents(controller.sensorEventQueue, &event, 1) > 0)
-                                   {
-                                       worldAccel = event.acceleration;
-                                   }
-                               }
-                           }
-            // Check if we are exiting.
-            if (app->destroyRequested != 0) {
-                engine.terminate();
-                renderer.terminate();
-                return;
+            {
+                if (controller.accelerometerSensor != NULL)
+                {
+                    ASensorEvent event;
+                    ASensorVector worldAccel;
+                    while (ASensorEventQueue_getEvents(controller.sensorEventQueue, &event, 1) > 0)
+                    {
+                       worldAccel = event.acceleration;
+                    }
+//                    engine.update_gravity(worldAccel.x, worldAccel.y, worldAccel.z);
+                }
+            }
+            while(!controller.isRunning){
+                // Check if we are exiting.
+                if (app->destroyRequested != 0) {
+                    engine.terminate();
+                    renderer.terminate();
+                    return;
+                }
             }
         }
         timespec currentT;
         clock_gettime(CLOCK_MONOTONIC, &currentT);
         float timeDelta = currentT.tv_sec-prevT.tv_sec + (float)(currentT.tv_nsec-prevT.tv_nsec)/1e9f;
         if(currentT.tv_sec != prevT.tv_sec){
-        	LOGE("RUNNING");
+            LOGE("RUNNING");
         }
         prevT = currentT;
         if(controller.animate_engine) engine.simulate(timeDelta);
@@ -205,4 +206,3 @@ void android_main(struct android_app* app) {
 }
 
 #undef DEBUG
-//END_INCLUDE(all)
