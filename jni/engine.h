@@ -19,16 +19,20 @@
 #define LOGE(...)
 #endif
 
-struct Engine
+class Engine
 {
+private:
     // Bullet physics stuff TODO: change these to unique_ptr?
     btBroadphaseInterface* broadphase;
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
     btSequentialImpulseConstraintSolver* solver;
-    btDiscreteDynamicsWorld* dynamicsWorld;
     std::vector<btCollisionShape*> collisionShapes;
 
+public:
+
+    btDiscreteDynamicsWorld* dynamicsWorld;
+    Engine();
     void init();
     void simulate(float timeDelta);
     void update_gravity(float x, float y, float z);
@@ -38,8 +42,7 @@ struct Engine
 /**
  * Initializes the bullet discrete dynamics world
  */
-void Engine::init()
-{
+Engine::Engine(){
     broadphase = new btDbvtBroadphase();
     collisionConfiguration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collisionConfiguration);
@@ -47,7 +50,10 @@ void Engine::init()
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
     dynamicsWorld->setGravity(btVector3(0,-10,0));// TODO: change this?
     LOGE("Engine init finished");
+}
 
+void Engine::init()
+{
     //Test stuff
     // Add ground
     btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0,0,0),1);
@@ -67,6 +73,18 @@ void Engine::init()
     btRigidBody* sphereRigidBody = new btRigidBody(sphereRigidBodyCI);
     dynamicsWorld->addRigidBody(sphereRigidBody);
     collisionShapes.push_back(sphereShape);
+
+    //Add a box
+    btVector3 boxDimensions(1,1,1);
+    btCollisionShape* boxShape = new btBoxShape(boxDimensions);
+    btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,8,0)));
+    btScalar boxMass = 1;
+    btVector3 boxInertia(0,0,0);
+    boxShape->calculateLocalInertia(boxMass  ,boxInertia);
+    btRigidBody::btRigidBodyConstructionInfo boxRigidBodyCI(boxMass,boxMotionState,boxShape,boxInertia);
+    btRigidBody* boxRigidBody = new btRigidBody(boxRigidBodyCI);
+    dynamicsWorld->addRigidBody(boxRigidBody);
+    collisionShapes.push_back(boxShape);
 
     LOGE("Test init finished");
 }

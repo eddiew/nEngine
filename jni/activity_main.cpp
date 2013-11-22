@@ -26,18 +26,20 @@
 #endif
 
 
-struct Controller{
-    Renderer* renderer;
-    Engine* engine;
+class Controller{
+public:
+    Renderer& renderer;
+    Engine& engine;
 
     bool isRunning;
     bool animate_engine;
     bool animate_renderer;
-
     // Android hardware stuff
     ASensorManager* sensorManager;
     const ASensor* accelerometerSensor;
     ASensorEventQueue* sensorEventQueue;
+
+    Controller(Renderer& _renderer, Engine& _engine):renderer(_renderer),engine(_engine), animate_engine(false), animate_renderer(false), isRunning(false){}
 };
 
 static int32_t handle_input(struct android_app* app, AInputEvent* event)
@@ -65,13 +67,13 @@ static int32_t handle_input(struct android_app* app, AInputEvent* event)
 static void handle_cmd(struct android_app* app, int32_t cmd)
 {
     Controller* controller = (Controller*)app->userData;// Because app->userData is a void*
-    Engine* engine = controller->engine;
-    Renderer* renderer = controller->renderer;
+    Engine& engine = controller->engine;
+    Renderer& renderer = controller->renderer;
     switch (cmd)
     {
         case APP_CMD_START:
             LOGE("START called");
-            engine->init();
+            engine.init();
             controller->isRunning = true;
             break;
         case APP_CMD_RESUME:
@@ -81,8 +83,7 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
         case APP_CMD_INIT_WINDOW:
             // get the window ready for showing
             LOGE("INIT_WINDOW Called");
-            if(renderer->init()) LOGE("EGL Display initialized");
-            else LOGE("Error initializing EGL Display");
+            renderer.init();
             controller->animate_renderer = true;
             break;
         case APP_CMD_GAINED_FOCUS:
@@ -111,7 +112,7 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
         case APP_CMD_TERM_WINDOW:
             LOGE("TERM_WINDOW called");
             // clean up the window because it is being hidden/closed
-            renderer->terminate();
+            renderer.terminate();
             controller->animate_renderer = false;
             break;
         case APP_CMD_PAUSE:
@@ -120,7 +121,7 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
             break;
         case APP_CMD_STOP:
             LOGE("STOP called");
-            engine->terminate();
+            engine.terminate();
             controller->isRunning = false;
             break;
         case APP_CMD_DESTROY:
@@ -140,15 +141,9 @@ static void handle_cmd(struct android_app* app, int32_t cmd)
 void android_main(struct android_app* app) {
     // Make sure glue isn't stripped.
     app_dummy();
-    Controller controller;
-    controller.animate_engine = false;
-    controller.animate_renderer = false;
-    Engine engine;
-    controller.engine = &engine;
-    Renderer renderer;
-    controller.renderer = &renderer;
-    renderer.link(engine.dynamicsWorld, &(app->window));
-    LOGE("Renderer Linked");
+    Engine engine = Engine();
+    Renderer renderer = Renderer(engine.dynamicsWorld->getCollisionObjectArray(), app->window);
+    Controller controller = Controller(renderer, engine);
 
     app->userData = &controller;
     app->onAppCmd = &handle_cmd;
@@ -166,7 +161,7 @@ void android_main(struct android_app* app) {
         int events;
         android_poll_source* source;
         // Function signature is: int ALooper_pollAll(int timeoutMillis, int* outFd, int* outEvents, void** outData);
-        while((ident = ALooper_pollAll(0, &fdesc, &events, (void**)&source)) >= 0)
+        while((ident = ALooper_pollAll(0, &fdesc, &events, (void**)&source)) >= 0 || !controller.isRunning)
         {
             // Process event
             if(source) source->process(app, source);
@@ -184,13 +179,11 @@ void android_main(struct android_app* app) {
                     engine.update_gravity(worldAccel.x, worldAccel.y, worldAccel.z);
                 }
             }
-            while(!controller.isRunning){
-                // Check if we are exiting.
-                if (app->destroyRequested != 0) {
-                    engine.terminate();
-                    renderer.terminate();
-                    return;
-                }
+            // Check if we are exiting.
+            if (app->destroyRequested != 0) {
+                engine.terminate();
+                renderer.terminate();
+                return;
             }
         }
         timespec currentT;

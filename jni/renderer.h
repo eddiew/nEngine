@@ -12,24 +12,24 @@
 #include <time.h>
 #include <memory>
 
-#define DEBUG
+#undef NDEBUG
 
-#ifdef DEBUG
-#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
-#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
-#define LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR, "nEngine", __VA_ARGS__))
-#else
+#ifdef NDEBUG
 #define LOGI(...)
 #define LOGW(...)
 #define LOGE(...)
-#endif // DEBUG
+#else
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+#define LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR, "nEngine", __VA_ARGS__))
+#endif // NDEBUG
 
-struct Renderer
+class Renderer
 {
+private:
     //Linking stuff
-    ANativeWindow** window;
-//    btCollisionObjectArray* collisionObjects;// this is a typedef for btAlignedObjectArray<class btCollisionObject*>, which is a vector wrapper
-    btDiscreteDynamicsWorld* dynamicsWorld;
+    ANativeWindow*& window;
+    btCollisionObjectArray& collisionObjects;// this is a typedef for btAlignedObjectArray<class btCollisionObject*>, which is a vector wrapper
     //Display stuff
     EGLDisplay display;
     EGLSurface surface;
@@ -37,9 +37,11 @@ struct Renderer
     EGLint windowWidth, windowHeight;
     //openGL stuff
     GLuint glProgramHandle;
+    void drawCollisionObject(btCollisionObject* collisionObject);
 
+public:
+    Renderer(btCollisionObjectArray& _collisionObjects, ANativeWindow*& _window): collisionObjects(_collisionObjects), window(_window){}
     int init();
-    void link(btDiscreteDynamicsWorld* dynamicsWorld, ANativeWindow** window);
     void drawFrame();
     void terminate();
 };
@@ -73,31 +75,16 @@ static const EGLint attribList[] =
 };
 
 /**
- * Link this instance to an app and an engine
- */
-void Renderer::link(btDiscreteDynamicsWorld* dynamicsWorld, ANativeWindow** window)
-{
-    this->dynamicsWorld = dynamicsWorld;
-    this->window = window;
-}
-
-/**
  * Compile an openGL shader
  * Return: the compiled shader
  */
 static GLuint compileShader(GLenum shaderType, const char* shaderSrc)
 {
     GLuint shaderHandle = glCreateShader(shaderType);
-    #ifdef DEBUG
-        if(!shaderHandle)
-        {
-            LOGE("Invalid Shader Type");
-            return 0;
-        }
-    #endif // DEBUG
+    assert(shaderHandle && "Invalid shaderType");
     glShaderSource(shaderHandle, 1, &shaderSrc, NULL);
     glCompileShader(shaderHandle);
-    #ifdef DEBUG
+    #ifndef NDEBUG
         GLint compiled;
         glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compiled);
         if(!compiled)
@@ -127,18 +114,12 @@ static GLuint initGLProgram(const char* vertexShaderSrc, const char* fragmentSha
     GLuint vertexShaderHandle = compileShader(GL_VERTEX_SHADER, vertexShaderSrc);
     GLuint fragmentShaderHandle = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSrc);
     GLuint programHandle = glCreateProgram();
-    #ifdef DEBUG
-    if(!programHandle)
-    {
-        LOGE("Error creating program");
-        return 0;
-    }
-    #endif // DEBUG
+    assert(programHandle && "Error creating program");
     glAttachShader(programHandle, vertexShaderHandle);
     glAttachShader(programHandle, fragmentShaderHandle);
     glBindAttribLocation(programHandle, 0, "vPosition");// Not sure why this is necessary
     glLinkProgram(programHandle);
-    #ifdef DEBUG
+    #ifndef NDEBUG
         GLint programLinked;
         glGetProgramiv(programHandle, GL_LINK_STATUS, &programLinked);
         if(!programLinked)
@@ -155,7 +136,7 @@ static GLuint initGLProgram(const char* vertexShaderSrc, const char* fragmentSha
             glDeleteProgram(programHandle);
             return 0;
         }
-    #endif // DEBUG
+    #endif // NDEBUG
     glUseProgram(programHandle);// Should I call this more often??
     return programHandle;
 }
@@ -166,7 +147,6 @@ static GLuint initGLProgram(const char* vertexShaderSrc, const char* fragmentSha
  */
 int Renderer::init()
 {
-    LOGE("renderer init called");
     EGLint format;
     EGLint numConfigs;
     EGLConfig config;
@@ -174,9 +154,9 @@ int Renderer::init()
     eglInitialize(display,0,0);
     eglChooseConfig(display, attribs, &config, 1, &numConfigs);
     eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
-    ANativeWindow_setBuffersGeometry(*window, 0, 0, format);
+    ANativeWindow_setBuffersGeometry(window, 0, 0, format);
 
-    surface = eglCreateWindowSurface(display, config,  *window, NULL);
+    surface = eglCreateWindowSurface(display, config,  window, NULL);
     context = eglCreateContext(display, config, NULL, attribList);
 
     eglMakeCurrent(display, surface, surface, context);
@@ -188,6 +168,7 @@ int Renderer::init()
     glProgramHandle = initGLProgram(vertexShaderSrc, fragmentShaderSrc);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
+    LOGE("Renderer initialized");
     return 1;
 }
 
@@ -211,54 +192,53 @@ void Renderer::terminate()
 
 void Renderer::drawFrame()
 {
-    if(display == NULL)
-    {
-        LOGE("Display not ready");
-        return;
-    }
+    assert((display != NULL || display != EGL_BAD_DISPLAY) && "Display not ready");
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    int ncobs = dynamicsWorld->getNumCollisionObjects();//why doesn't this work?
-//    LOGE("Num collision objects: %d", dynamicsWorld->getNumCollisionObjects());
-//    for(int i = 0; i < dynamicsWorld->getNumCollisionObjects(); i++)
-//    {
-//        LOGE("Flag2");
-//        btCollisionObject* collisionObject = dynamicsWorld->getCollisionObjectArray()[i];
-//        btScalar worldTransform[16];
-//        collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
-//        switch(collisionObject->getCollisionShape()->getShapeType())
-//        {
-//            case CUSTOM_CONVEX_SHAPE_TYPE:
-//                break;
-//            case BOX_SHAPE_PROXYTYPE:
-//                break;
-//            case UNIFORM_SCALING_SHAPE_PROXYTYPE:
-//                break;
-//            case COMPOUND_SHAPE_PROXYTYPE:
-//                break;
-//
-//        }
-//        LOGE("Flag3");
-//        GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
-//         -0.5f, -0.5f, 0.0f,
-//         0.5f, -0.5f, 0.0f};
-//         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-//          glEnableVertexAttribArray(0);
-//          glDrawArrays(GL_TRIANGLES, 0, 3);
-//    }
-//    LOGE("Flag10");
-    GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f};
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
-    glEnableVertexAttribArray(0);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+//    LOGE("Num collision objects: %d", collisionObjects.size());
+    for(int i = 0; i < collisionObjects.size(); i++)
+    {
+        drawCollisionObject(collisionObjects[i]);
+    }
+//    GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
+//        -0.5f, -0.5f, 0.0f,
+//        0.5f, -0.5f, 0.0f};
+//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+//    glEnableVertexAttribArray(0);
+//    glDrawArrays(GL_TRIANGLES, 0, 3);
 
     eglSwapBuffers(display,surface);
 //    LOGE("FRAME DRAWN");
 }
 
-#undef DEBUG
+void Renderer::drawCollisionObject(btCollisionObject* collisionObject)
+{
+    btScalar worldTransform[16];//This will only ever hold 15 elements, but maybe 16 is better for memory alignment?
+    collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
+    for(int n = 0; n < 16; n++){
+        LOGE("worldTransform[%d]: %f",n,worldTransform[n]);
+    }
+    btCollisionShape* collisionShape = collisionObject->getCollisionShape();
+    switch(collisionShape->getShapeType())
+    {
+        case CUSTOM_CONVEX_SHAPE_TYPE:
+        {
+            break;
+        }
+        case BOX_SHAPE_PROXYTYPE:
+        {
+            btBoxShape* boxShape = static_cast<btBoxShape*>(collisionShape);
+            btVector3 halfExtents = boxShape->getHalfExtentsWithMargin();
+            LOGE("BoxShape HalfExtents: %f, %f, %f",halfExtents[0],halfExtents[1],halfExtents[2]);
+            break;
+        }
+        case UNIFORM_SCALING_SHAPE_PROXYTYPE:
+            break;
+        case COMPOUND_SHAPE_PROXYTYPE:
+            break;
+        case SPHERE_SHAPE_PROXYTYPE:
+            break;
+    }
+}
 
 #endif // _RENDERER
-
