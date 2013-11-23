@@ -192,14 +192,86 @@
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/Bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/Bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/Bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/gldata.h \
+ /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h \
+ /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h \
+ /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h \
  /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/renderer.h \
  /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/EGL/egl.h \
  /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/EGL/eglplatform.h \
- /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h \
- /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h \
- /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h \
  /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/glm.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/core/_fixes.hpp \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/climits \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/limits \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/core/setup.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_detail.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/setup.hpp \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_vectorize.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_half.hpp \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_half.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_detail.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_float.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_int.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_gentype.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_size.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec1.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle_func.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec1.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec2.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec2.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec3.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec3.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec4.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec4.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x2.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x2.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x3.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x3.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x4.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x4.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x2.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x2.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x3.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x3.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x4.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x4.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x2.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x2.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x3.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x3.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x4.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x4.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_trigonometric.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_trigonometric.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_exponential.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_exponential.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_common.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_fixes.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_common.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_packing.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_packing.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_geometric.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_geometric.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_matrix.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_matrix.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_vector_relational.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_vector_relational.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_integer.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_integer.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle.hpp \
  /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/memory
 
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/time.h:
@@ -586,6 +658,14 @@
 
 /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/Bullet/BulletDynamics/Dynamics/btRigidBody.h:
 
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/gldata.h:
+
+/cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h:
+
+/cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h:
+
+/cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h:
+
 /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/vector:
 
 /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/renderer.h:
@@ -594,12 +674,148 @@
 
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/EGL/eglplatform.h:
 
-/cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/KHR/khrplatform.h:
-
-/cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2.h:
-
-/cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2platform.h:
-
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/GLES2/gl2ext.h:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/glm.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/core/_fixes.hpp:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/climits:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/limits:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdio:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/core/setup.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_detail.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/setup.hpp:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_vectorize.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_half.hpp:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstdlib:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_half.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_detail.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_float.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_int.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_gentype.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_size.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec1.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle_func.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec1.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec2.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec2.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec3.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec3.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec4.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_vec4.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x2.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x2.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x3.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x3.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x4.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat2x4.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x2.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x2.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x3.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x3.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x4.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat3x4.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x2.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x2.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x3.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x3.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x4.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/type_mat4x4.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_trigonometric.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_trigonometric.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_exponential.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_exponential.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_common.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_fixes.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_common.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_packing.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_packing.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_geometric.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_geometric.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_matrix.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_matrix.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_vector_relational.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_vector_relational.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_integer.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_integer.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle.hpp:
 
 /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/memory:

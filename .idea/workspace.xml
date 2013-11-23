@@ -70,7 +70,7 @@
       <file leaf-file-name="activity_main.cpp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jni/activity_main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="93" selection-start="4557" selection-end="4557" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3536">
+            <state line="202" column="65" selection-start="6824" selection-end="6824" vertical-scroll-proportion="0.0" vertical-offset="2760" max-vertical-offset="3621">
               <folding />
             </state>
           </provider>
@@ -79,7 +79,16 @@
       <file leaf-file-name="engine.h" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jni/engine.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="41" selection-start="913" selection-end="913" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="2380">
+            <state line="75" column="39" selection-start="2579" selection-end="2579" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="2482">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gldata.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jni/gldata.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="76" selection-start="966" selection-end="966" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1326">
               <folding />
             </state>
           </provider>
@@ -88,7 +97,34 @@
       <file leaf-file-name="renderer.h" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jni/renderer.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="225" column="18" selection-start="7621" selection-end="7621" vertical-scroll-proportion="1.0123457" vertical-offset="3005" max-vertical-offset="4233">
+            <state line="227" column="38" selection-start="7857" selection-end="7857" vertical-scroll-proportion="0.6851852" vertical-offset="3304" max-vertical-offset="4216">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ulp.hpp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jni/glm/gtc/ulp.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.mk" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jni/Application.mk">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Android.mk" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jni/Android.mk">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="317" column="49" selection-start="18948" selection-end="18948" vertical-scroll-proportion="0.0" vertical-offset="4923" max-vertical-offset="5746">
               <folding />
             </state>
           </provider>
@@ -105,15 +141,16 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/jni/engine.h" />
         <option value="$PROJECT_DIR$/jni/activity_main.cpp" />
+        <option value="$PROJECT_DIR$/jni/engine.h" />
+        <option value="$PROJECT_DIR$/jni/gldata.h" />
         <option value="$PROJECT_DIR$/jni/renderer.h" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1280" />
-    <option name="width" value="1280" />
+    <option name="width" value="1279" />
     <option name="height" value="1400" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -142,7 +179,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -193,57 +229,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nEngine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nEngine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jni" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bullet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BulletDynamics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nEngine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nEngine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jni" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bullet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BulletDynamics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dynamics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -266,6 +255,9 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Eddie\Documents\workspace_eclipse\nEngine\jni" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Eddie\Documents\workspace_eclipse\nEngine\jni\renderer" />
     </key>
@@ -299,19 +291,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -337,6 +316,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -451,32 +443,32 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="0" width="1280" height="1400" extended-state="0" />
-    <editor active="false" />
+    <frame x="1280" y="0" width="1279" height="1400" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32991317" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32991317" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39936858" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291239" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25019795" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991317" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -498,20 +490,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/jni/renderer.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="81" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2941">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jni/engine.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="1" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jni/activity_main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="79" column="38" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.0" vertical-offset="1343" max-vertical-offset="3519">
@@ -741,16 +719,6 @@
         <state line="298" column="33" selection-start="17967" selection-end="17968" vertical-scroll-proportion="0.0" vertical-offset="4923" max-vertical-offset="5746" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jni/Application.mk">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1241" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jni/Android.mk">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="298" column="33" selection-start="17967" selection-end="17968" vertical-scroll-proportion="0.17375456" vertical-offset="4923" max-vertical-offset="5746" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jni/Bullet/BulletDynamics/Dynamics/btRigidBody.h">
       <provider selected="true" editor-type-id="text-editor">
         <state line="54" column="17" selection-start="2669" selection-end="2680" vertical-scroll-proportion="-1.637037" vertical-offset="2244" max-vertical-offset="11849" />
@@ -810,21 +778,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jni/activity_main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="93" selection-start="4557" selection-end="4557" vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="3536">
+        <state line="202" column="65" selection-start="6824" selection-end="6824" vertical-scroll-proportion="0.0" vertical-offset="2811" max-vertical-offset="3621">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jni/glm/gtc/ulp.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jni/Application.mk">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jni/Android.mk">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="317" column="49" selection-start="18948" selection-end="18948" vertical-scroll-proportion="0.0" vertical-offset="4923" max-vertical-offset="5746">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jni/engine.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="41" selection-start="913" selection-end="913" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="2380">
+        <state line="75" column="39" selection-start="2579" selection-end="2579" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="2482">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jni/gldata.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="76" selection-start="966" selection-end="966" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1326">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jni/renderer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="18" selection-start="7621" selection-end="7621" vertical-scroll-proportion="1.0123457" vertical-offset="3005" max-vertical-offset="4233">
+        <state line="227" column="38" selection-start="7857" selection-end="7857" vertical-scroll-proportion="0.6851852" vertical-offset="3304" max-vertical-offset="4216">
           <folding />
         </state>
       </provider>

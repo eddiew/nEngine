@@ -1,3 +1,8 @@
+/**
+ * TODO:
+ * Read object data from .obj files
+ *
+ */
 #include <time.h>
 
 #include <jni.h>

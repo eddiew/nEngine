@@ -9,8 +9,13 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#define GLM_SWIZZLE // Make GLM use c++11
+#include <glm/glm.hpp>
+
 #include <time.h>
 #include <memory>
+
+#include <gldata.h>
 
 #undef NDEBUG
 
@@ -37,7 +42,6 @@ private:
     EGLint windowWidth, windowHeight;
     //openGL stuff
     GLuint glProgramHandle;
-    void drawCollisionObject(btCollisionObject* collisionObject);
 
 public:
     Renderer(btCollisionObjectArray& _collisionObjects, ANativeWindow*& _window): collisionObjects(_collisionObjects), window(_window){}
@@ -54,10 +58,16 @@ static const char fragmentShaderSrc[] =
     "   gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);"
     "}";
 static const char vertexShaderSrc[] =
-    "attribute vec4 vPosition;"
+    "uniform mat4 uMVPMatrix;"
+    "attribute vec4 aPosition;"
+//    "attribute vec4 aColor;"
+//    "attribute vec4 aNormal;"
+//    "varying vec3 vPosition;"
+//    "varying vec4 vColor;"
+//    "varying vec3 vNormal;"
     "void main()"
     "{"
-    "   gl_Position = vPosition;"
+    "   gl_Position = uMVPMatrix*aPosition;"
     "}";
 static const EGLint attribs[] =
 {
@@ -192,13 +202,31 @@ void Renderer::terminate()
 
 void Renderer::drawFrame()
 {
-    assert((display != NULL || display != EGL_BAD_DISPLAY) && "Display not ready");
+    assert(display != NULL && "Display not ready");
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //    LOGE("Num collision objects: %d", collisionObjects.size());
     for(int i = 0; i < collisionObjects.size(); i++)
     {
-        drawCollisionObject(collisionObjects[i]);
+        btCollisionObject* collisionObject = collisionObjects[i];
+        if(collisionObject->getCollisionShape()->getShapeType() != BOX_SHAPE_PROXYTYPE) return;
+        btScalar worldTransform[16];
+        collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
+
+    //    for(int n = 0; n < 16; n++){
+    //        LOGE("worldTransform[%d]: %f",n,worldTransform[n]);
+    //    }
+
+        GLData* glData = (GLData*)collisionObject->getCollisionShape()->getUserPointer();
+        int vertexPositionHandle = glGetAttribLocation(glProgramHandle, "aPosition");
+        glEnableVertexAttribArray(vertexPositionHandle);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->vertexBufferHandle);
+        glVertexAttribPointer(vertexPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        //TODO: do I need to call glDisableVertexAttribArray(vertexPositionHandle)?
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, glData->indexBufferHandle);
+        //TODO: Matrix transformations
+        glDrawElements(GL_TRIANGLE_STRIP, glData->nVertices, GL_UNSIGNED_SHORT, (void*) 0);
     }
 //    GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,
 //        -0.5f, -0.5f, 0.0f,
@@ -211,34 +239,5 @@ void Renderer::drawFrame()
 //    LOGE("FRAME DRAWN");
 }
 
-void Renderer::drawCollisionObject(btCollisionObject* collisionObject)
-{
-    btScalar worldTransform[16];//This will only ever hold 15 elements, but maybe 16 is better for memory alignment?
-    collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
-    for(int n = 0; n < 16; n++){
-        LOGE("worldTransform[%d]: %f",n,worldTransform[n]);
-    }
-    btCollisionShape* collisionShape = collisionObject->getCollisionShape();
-    switch(collisionShape->getShapeType())
-    {
-        case CUSTOM_CONVEX_SHAPE_TYPE:
-        {
-            break;
-        }
-        case BOX_SHAPE_PROXYTYPE:
-        {
-            btBoxShape* boxShape = static_cast<btBoxShape*>(collisionShape);
-            btVector3 halfExtents = boxShape->getHalfExtentsWithMargin();
-            LOGE("BoxShape HalfExtents: %f, %f, %f",halfExtents[0],halfExtents[1],halfExtents[2]);
-            break;
-        }
-        case UNIFORM_SCALING_SHAPE_PROXYTYPE:
-            break;
-        case COMPOUND_SHAPE_PROXYTYPE:
-            break;
-        case SPHERE_SHAPE_PROXYTYPE:
-            break;
-    }
-}
 
 #endif // _RENDERER

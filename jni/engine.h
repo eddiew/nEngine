@@ -4,6 +4,8 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#include <gldata.h>
+
 #include <android/sensor.h>
 #include <vector>
 
@@ -22,7 +24,7 @@
 class Engine
 {
 private:
-    // Bullet physics stuff TODO: change these to unique_ptr?
+    // Bullet physics stuff
     btBroadphaseInterface* broadphase;
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
@@ -42,13 +44,14 @@ public:
 /**
  * Initializes the bullet discrete dynamics world
  */
-Engine::Engine(){
+Engine::Engine()
+{
     broadphase = new btDbvtBroadphase();
     collisionConfiguration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collisionConfiguration);
     solver = new btSequentialImpulseConstraintSolver;
     dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
-    dynamicsWorld->setGravity(btVector3(0,-10,0));// TODO: change this?
+//    dynamicsWorld->setGravity(btVector3(0,-10,0));
     LOGE("Engine init finished");
 }
 
@@ -63,20 +66,22 @@ void Engine::init()
     dynamicsWorld->addRigidBody(groundRigidBody);
     collisionShapes.push_back(groundShape);
 
-    //Add a sphere
-    btCollisionShape* sphereShape = new btSphereShape(1);
-    btDefaultMotionState* sphereMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,10,0)));
-    btScalar mass = 1;
-    btVector3 sphereInertia(0,0,0);
-    sphereShape->calculateLocalInertia(mass,sphereInertia);
-    btRigidBody::btRigidBodyConstructionInfo sphereRigidBodyCI(mass,sphereMotionState,sphereShape,sphereInertia);
-    btRigidBody* sphereRigidBody = new btRigidBody(sphereRigidBodyCI);
-    dynamicsWorld->addRigidBody(sphereRigidBody);
-    collisionShapes.push_back(sphereShape);
+//    //Add a sphere
+//    btCollisionShape* sphereShape = new btSphereShape(1);
+//    btDefaultMotionState* sphereMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,10,0)));
+//    btScalar mass = 1;
+//    btVector3 sphereInertia(0,0,0);
+//    sphereShape->calculateLocalInertia(mass,sphereInertia);
+//    btRigidBody::btRigidBodyConstructionInfo sphereRigidBodyCI(mass,sphereMotionState,sphereShape,sphereInertia);
+//    btRigidBody* sphereRigidBody = new btRigidBody(sphereRigidBodyCI);
+//    dynamicsWorld->addRigidBody(sphereRigidBody);
+//    collisionShapes.push_back(sphereShape);
 
-    //Add a box
+    //add a box
     btVector3 boxDimensions(1,1,1);
     btCollisionShape* boxShape = new btBoxShape(boxDimensions);
+    GLData* glData = new GLData(boxShape);
+    boxShape->setUserPointer(glData);
     btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,8,0)));
     btScalar boxMass = 1;
     btVector3 boxInertia(0,0,0);
@@ -119,6 +124,7 @@ void Engine::terminate()
     }
     for(btCollisionShape* collisionShape : collisionShapes)
     {
+        delete (GLData*)collisionShape->getUserPointer();
         delete collisionShape;
     }
     delete dynamicsWorld;
