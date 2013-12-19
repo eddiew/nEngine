@@ -11,6 +11,7 @@
 
 #define GLM_SWIZZLE // Make GLM use c++11
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <time.h>
 #include <memory>
@@ -42,6 +43,9 @@ private:
     EGLint windowWidth, windowHeight;
     //openGL stuff
     GLuint glProgramHandle;
+    //openGL shader stuff
+    GLuint glsMVPMatrixHandle;
+    void initGLProgram(const char* vertexShaderSrc, const char* fragmentShaderSrc);
 
 public:
     Renderer(btCollisionObjectArray& _collisionObjects, ANativeWindow*& _window): collisionObjects(_collisionObjects), window(_window){}
@@ -119,41 +123,41 @@ static GLuint compileShader(GLenum shaderType, const char* shaderSrc)
  * Create an openGL program and attach shaders
  * Return: the created program's handle
  */
-static GLuint initGLProgram(const char* vertexShaderSrc, const char* fragmentShaderSrc)
+void Renderer::initGLProgram(const char* vertexShaderSrc, const char* fragmentShaderSrc)
 {
     GLuint vertexShaderHandle = compileShader(GL_VERTEX_SHADER, vertexShaderSrc);
     GLuint fragmentShaderHandle = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSrc);
-    GLuint programHandle = glCreateProgram();
-    assert(programHandle && "Error creating program");
-    glAttachShader(programHandle, vertexShaderHandle);
-    glAttachShader(programHandle, fragmentShaderHandle);
-    glBindAttribLocation(programHandle, 0, "vPosition");// Not sure why this is necessary
-    glLinkProgram(programHandle);
+    glProgramHandle = glCreateProgram();
+    assert(glProgramHandle && "Error creating program");
+    glAttachShader(glProgramHandle, vertexShaderHandle);
+    glAttachShader(glProgramHandle, fragmentShaderHandle);
+    glBindAttribLocation(glProgramHandle, 0, "aPosition");//TODO: is this necessary?
+    glsMVPMatrixHandle = glGetUniformLocation(glProgramHandle, "uMVPMatrix");
+    glLinkProgram(glProgramHandle);
     #ifndef NDEBUG
         GLint programLinked;
-        glGetProgramiv(programHandle, GL_LINK_STATUS, &programLinked);
+        glGetProgramiv(glProgramHandle, GL_LINK_STATUS, &programLinked);
         if(!programLinked)
         {
             GLint infoMsgLength = 0;
-            glGetProgramiv(programHandle, GL_INFO_LOG_LENGTH, &infoMsgLength);
+            glGetProgramiv(glProgramHandle, GL_INFO_LOG_LENGTH, &infoMsgLength);
             if(infoMsgLength > 1)
             {
                 char* infoLogEntry = new char[infoMsgLength];//malloc(sizeof(char)*infoMsgLength);
-                glGetProgramInfoLog(programHandle, infoMsgLength, NULL, infoLogEntry);
+                glGetProgramInfoLog(glProgramHandle, infoMsgLength, NULL, infoLogEntry);
                 LOGE("Error linking program:\n%s\n", infoLogEntry);
                 delete[] infoLogEntry;//free(infoLogEntry);
             }
-            glDeleteProgram(programHandle);
-            return 0;
+            glDeleteProgram(glProgramHandle);
+            return;
         }
     #endif // NDEBUG
-    glUseProgram(programHandle);// Should I call this more often??
-    return programHandle;
+    glUseProgram(glProgramHandle);// Should I call this more often??
 }
 
 /**
  * Initialize an EGL context for the current display
- * Return: 1 if no errors, otherwise the ID of the error encountered
+ * Return: 1 if no errors
  */
 int Renderer::init()
 {
@@ -175,7 +179,7 @@ int Renderer::init()
     eglQuerySurface(display, surface, EGL_HEIGHT, &windowHeight);
 //    LOGE("display dimensions: %d, %d", windowWidth, windowHeight);
     // Initialize GL state.
-    glProgramHandle = initGLProgram(vertexShaderSrc, fragmentShaderSrc);
+    initGLProgram(vertexShaderSrc, fragmentShaderSrc);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     LOGE("Renderer initialized");
@@ -210,7 +214,7 @@ void Renderer::drawFrame()
     {
         btCollisionObject* collisionObject = collisionObjects[i];
         if(collisionObject->getCollisionShape()->getShapeType() != BOX_SHAPE_PROXYTYPE) return;
-        btScalar worldTransform[16];
+        btScalar worldTransform[16];// Row Major. must be converted to column major for openGL use
         collisionObject->getInterpolationWorldTransform().getOpenGLMatrix(worldTransform);
 
     //    for(int n = 0; n < 16; n++){
@@ -226,6 +230,8 @@ void Renderer::drawFrame()
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, glData->indexBufferHandle);
         //TODO: Matrix transformations
+        glm::mat4 mModel = glm::make_mat4(worldTransform);//Does this need to be converted to column major?
+
         glDrawElements(GL_TRIANGLE_STRIP, glData->nVertices, GL_UNSIGNED_SHORT, (void*) 0);
     }
 //    GLfloat vVertices[] = {0.0f, 0.5f, 0.0f,

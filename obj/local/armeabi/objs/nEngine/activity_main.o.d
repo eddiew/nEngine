@@ -272,6 +272,23 @@
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.hpp \
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.inl \
  /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/type_ptr.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../glm.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../core/_fixes.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/half_float.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../glm.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../core/_fixes.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/half_float.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/quaternion.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/half_float.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/constants.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/../glm.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/../core/_fixes.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/../gtc/half_float.hpp \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/constants.inl \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/quaternion.inl \
+ /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstring \
+ /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/type_ptr.inl \
  /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/memory
 
 /cygdrive/c/ndk/platforms/android-9/arch-arm/usr/include/time.h:
@@ -817,5 +834,39 @@
 /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/func_noise.inl:
 
 /cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/./core/_swizzle.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/type_ptr.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../glm.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../core/_fixes.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/half_float.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../glm.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../core/_fixes.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/half_float.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/quaternion.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/half_float.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/constants.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/../glm.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/../core/_fixes.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/../gtc/half_float.hpp:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/../gtc/constants.inl:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/../gtc/quaternion.inl:
+
+/cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstring:
+
+/cygdrive/c/Users/Eddie/Documents/workspace_eclipse/nEngine/jni/glm/gtc/type_ptr.inl:
 
 /cygdrive/c/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/memory:
